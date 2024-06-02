@@ -3,31 +3,11 @@
 #define  pr priority_queue<int>
 #define vll vector<ll>
 #define vvll vector<vll>
-
 #define all(vc) ((vc).begin()), ((vc).end())
 #define Hakuna_Matata ios_base::sync_with_stdio(false),cout.tie(NULL),cin.tie(NULL);
 #define vvll vector<vll>
 #define inf 1000000000000000
 #define low lower_bound(arr, arr + n, x)
-// getline(cin, s);
-//upper_bound(arr, arr+5, 35) - arr;
-//lower_bound(arr, arr+n, p) - arr;
-// *max_element(arr+l , arr+r+1) ;
-//freopen("input.txt","r",stdin);
-//freopen("output.txt","w",stdout);
-//distance(set.begin(), set.lower_bound(n))
-//last elment in set rbegin(),erase elemint st.erase(st.find(x));
-//result += (arr[i] * (i + 1) * (n - i));
-#define  pq1  priority_queue <pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<int>>
-//vector<vector<bool>> vis(r, vector<bool>(c,0));
-//fixed << setprecision(3)
-//ans.to_ullong()
-//rotate(c.begin(), it, c.end());
-/*
-auto it = unique(v.begin(), v.end());
-      v.resize(distance(v.begin(), it));
- */
- // cout.precision(15);
 using namespace std;
 template < typename T = int > using Pair = pair < T, T >;
 const int N=1e6+7;
