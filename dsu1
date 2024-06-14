@@ -1,0 +1,134 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int MAX = 1e6 + 5;
+int parent[MAX], cnt[MAX];
+
+void initialize(int n) {
+    for (int i = 0; i < n; i++) {
+        parent[i] = i;
+        cnt[i] = 1;
+    }
+}
+
+int find(int u) {
+    if (u != parent[u]) {
+        parent[u] = find(parent[u]); // Path compression
+    }
+    return parent[u];
+}
+
+void merge(int u, int v) {
+    u = find(u);
+    v = find(v);
+    if (u != v) {
+        parent[v] = u;
+        cnt[u] += cnt[v];
+    }
+}
+
+int n, m;
+
+vector<string> grid;
+
+bool is_valid(int i, int j) {
+    return i >= 0 && i < n && j >= 0 && j < m && grid[i][j] == '#';
+}
+
+void solve() {
+    cin >> n >> m;
+   // vis = vector<vector<int>>(n, vector<int>(m+, 0));
+
+    initialize(n * m);
+    grid = vector<string>(n+5);
+    for (int i = 0; i < n; i++) {
+        cin >> grid[i];
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (grid[i][j] != '#') continue;
+            if (i + 1 < n && grid[i + 1][j] == '#') {
+                merge(i * m + j, (i + 1) * m + j);
+            }
+            if (j + 1 < m && grid[i][j + 1] == '#') {
+                merge(i * m + j, i * m + j + 1);
+            }
+        }
+    }
+
+    int ans = 1;
+    for (int i = 0; i < n; i++) {
+        int res = 0;
+        set<int> st;
+       //int
+       //
+        for (int j = 0; j < m; j++) {
+            if (grid[i][j] == '.')
+                res +=1;
+                if (i + 1 < n && grid[i + 1][j] == '#') {
+                    int ind = find((i + 1) * m + j);
+                    st.insert(ind);
+                }
+                if (j + 1 < m && grid[i][j + 1] == '#') {
+                    int ind = find(i * m + j + 1);
+                    st.insert(ind);
+                }
+                if (j - 1 >= 0 && grid[i][j - 1] == '#') {
+                    int ind = find(i * m + j - 1);
+                     st.insert(ind);
+                }
+                if (is_valid(i-1,j)) {
+                    int ind = find((i-1) * m + j );
+                     st.insert(ind);
+                }
+
+        }
+        for(auto it:st){
+            res+=cnt[it];
+        }
+        ans = max(ans, res);
+    }
+
+    for (int j = 0; j < m; j++) {
+        int res = 0;
+        set<int> st;
+        for (int i = 0; i < n; i++) {
+            if (grid[i][j] == '.')
+                res +=1;
+                if (i + 1 < n && grid[i + 1][j] == '#') {
+                    int ind = find((i + 1) * m + j);
+                     st.insert(ind);
+                }
+                if (i - 1 >= 0 && grid[i - 1][j] == '#') {
+                    int ind = find((i - 1) * m + j);
+                    st.insert(ind);
+                }
+                if (j + 1 < m && grid[i][j + 1] == '#') {
+                    int ind = find(i * m + j + 1);
+                    st.insert(ind);
+                }
+                if (is_valid(i,j-1)) {
+                    int ind = find((i) * m + j - 1);
+                    st.insert(ind);
+                }
+
+        }
+        for(auto it:st){
+            res+=cnt[it];
+        }
+        ans = max(ans, res);
+    }
+    cout << ans << '\n';
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
