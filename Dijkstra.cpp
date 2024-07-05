@@ -8,12 +8,12 @@ vector<long long> Dijkstra(int src, int n) {
     q.push({0, src});
     while (!q.empty()) {
         int u = q.top().second;
-        long long cost = q.top().first;
+       ll cost = q.top().first;
         q.pop();
-        if (dist[u] != -1) continue;
+        if (~dist[u]  continue;
         dist[u] = cost;
         for (auto &[v, w] : adj[u]) {
-            if (dist[v] == -1) {
+            if (~dist[v]) {
                 q.push({cost + w, v});
             }
         }
