@@ -1,5 +1,5 @@
 const int INF = 1e9;
-const int N = 1000;  
+const int N = 200;  
 vector<vector<int>> dist(N, vector<int>(N, INF));
 void floydWarshall(int n) {
     for (int k = 0; k < n; ++k) {
