@@ -8,3 +8,4 @@ ll fpow(ll x,ll y){
     }
     return ans;
 }
+//modinv a/b=a*fpow(b,mod-2)%mod
