@@ -6,3 +6,5 @@ int nCr(int n, int r)
         return 1;
     return nCr(n - 1, r - 1) + nCr(n - 1, r);
 }
+npr=fac(n)/fac(n-r);
+npr=fac(n)/fac(r)*fac(n-r)
