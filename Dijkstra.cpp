@@ -1,22 +1,28 @@
-#define  ll  long long
-const int N = 1e5+5;  
-vector<pair<int, int>> adj[N]; 
+const int N = 1e5+5;
 
-vector<long long> Dijkstra(int src, int n) {
-    vector<ll> dist(n + 5, -1);
-    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<>> q;
-    q.push({0, src});
-    while (!q.empty()) {
-        int u = q.top().second;
-       ll cost = q.top().first;
-        q.pop();
-        if (~dist[u]  continue;
-        dist[u] = cost;
-        for (auto &[v, w] : adj[u]) {
-            if (~dist[v]) {
-                q.push({cost + w, v});
-            }
-        }
+struct Edge {
+    int node;
+    ll w;
+};
+
+vector<Edge> adj1[N],adj2[N];
+
+vector<ll> Dijkstra(int src, int n) {
+    vector<ll> dist1(n + 1, -1);
+    priority_queue<pair<ll, int>> pq;
+    pq.push({0, src});
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        ll cost = pq.top().first;
+        pq.pop();
+         for (auto& e : adj1[u]) {
+            int v = e.node;
+            ll w = e.w;
+           if (dist1[v]<cost+w ){
+                dist1[v] =cost+w ;
+                pq.push({cost + w, v});
+             }
+             }
     }
-    return dist;
+    return dist1;
 }
