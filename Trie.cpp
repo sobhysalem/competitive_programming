@@ -31,13 +31,13 @@ struct Trie{
             }
             return cur->prefix;
         }
-        int cnt_word(string &s){
-            Node *cur=root;
+        ll cnt_word(string &s){
             ll ret=0;
+            Node *cur=root;
             for(auto it:s){
                 int idx=it-'a';
                 if(cur->child[idx]==0){
-                     break;
+                    break;
                 }
                 cur=cur->child[idx];
                 ret+=cur->prefix*2;
