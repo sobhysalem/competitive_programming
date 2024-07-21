@@ -61,7 +61,7 @@ void solve(){
 
    int n,q;
    cin>>n>>q;
-   Segment_Tree se(N);
+
    vector<int>ans;
     for(int i=1;i<=n;i++){
         cin>>v[i];
@@ -97,6 +97,7 @@ void solve(){
     for(int i=1;i<ans.size();i++){
         if(ans[i]!=ans[i-1])mp[ans[i]]=x++;
     }
+    Segment_Tree se(x+5);
     for(int i=1;i<=n;i++){
         se.update(mp[v[i]],1);
     }
