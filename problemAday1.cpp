@@ -5,7 +5,11 @@
 using namespace std;
 
 const int mod=1e9+7;
-
+struct Node{
+    int ind;
+    int l;
+    int r;
+};
 struct Segment_Tree {
     vector<int>seg;
     int siz=1;
@@ -49,7 +53,7 @@ struct Segment_Tree {
         update(1,1,siz,i,v);
     }
 };
-const int N=1e5+5;
+const int N=3e5+5;
 vector<int>v(N);
 
 void solve(){
@@ -57,31 +61,31 @@ void solve(){
 
    int n,q;
    cin>>n>>q;
-   Segment_Tree se(n);
+   Segment_Tree se(N);
    vector<int>ans;
     for(int i=1;i<=n;i++){
         cin>>v[i];
         ans.push_back(v[i]);
 
     }
-    vector<vector<int>>qu(q);
+    vector<Node>qu(q);
     int j=0;
     while(j<q){
         int op;
         cin>>op;
-        qu[j].push_back(op);
+        qu[j].ind=(op);
         if(op==1){
             int ind,vl2;
             cin>>ind>>vl2;
-            qu[j].push_back(ind);
-            qu[j].push_back(vl2);
+            qu[j].l=(ind);
+            qu[j].r=(vl2);
             ans.push_back(vl2);
         }
         else{
             int l,r;
             cin>>l>>r;
-           qu[j].push_back(l);
-           qu[j].push_back(r);
+           qu[j].l=(l);
+           qu[j].r=(r);
 
         }
         j++;
@@ -98,15 +102,16 @@ void solve(){
     }
     //cout<<se.query(1,3)<<'\n';
     for(int i=0;i<q;i++){
-        if(qu[i][0]==1){
-            int ind=qu[i][1],vl=qu[i][2];
+        if(qu[i].ind==1){
+            int ind=qu[i].l,vl=qu[i].r;
+            if(v[ind]==vl)continue;
             se.update(mp[v[ind]],-1);
             se.update(mp[vl],1);
             v[ind]=vl;
         }
         else{
-            int l=qu[i][1],r=qu[i][2];
-            if(!mp[l]||!mp[r]){
+            int l=qu[i].l,r=qu[i].r;
+            if(mp[r]-mp[l]<r-l){
                 cout<<0<<'\n';
                 continue;
             }
