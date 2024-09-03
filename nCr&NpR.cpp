@@ -19,7 +19,7 @@ void factorial(){
         fact[i] = (fact[i - 1] * i) % MOD;
     inv[1e6]=modinv(fact[1e6]);
     for(int i=1e6-1;i>=0;i--){
-        (inv[i]=inv[i+1]*(i+1));
+        (inv[i]=inv[i+1]*(i+1)%MOD);
     }
 }
 
